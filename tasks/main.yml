@@ -49,12 +49,12 @@
   notify: restart webserver
 
 - name: Check for separate cli php conf.d directory.
-  stat: path=/etc/php5/cli/conf.d
+  stat: path=/etc/php/5.6/cli/conf.d
   register: php_cli_path
 
 - name: Symlink twig.ini into separate cli directory if it exists.
   file:
     src: "{{ php_extension_conf_path }}/twig.ini"
-    dest: /etc/php5/cli/conf.d/twig.ini
+    dest: /etc/php/5.6/cli/conf.d/twig.ini
     state: link
   when: php_cli_path.stat.isdir is defined and php_cli_path.stat.isdir|bool
